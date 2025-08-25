@@ -38,3 +38,7 @@ function attachEventListeners() {
     });
   });
 }
+
+function directToAddEntry() {
+  window.location.href = "gbook-add.php";
+}
