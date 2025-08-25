@@ -1,128 +1,90 @@
-/* ========================
-   Color & Font Setup
-======================== */
-:root {
-  --color-light-text: #79B4B7;
-  --color-dark-text: #ffffff;
-  --color-form-bg: #9d9d9d;
-  --color-form-border: #797979;
-  --color-form-label: #F8F0DF;
-  --color-input-hover: #555;
-  --color-submit-bg: #79B4B7;
-  --color-submit-text: #ffffff;
+.entry {
+    background-color: #f0f0f0;
+    padding: 15px;
+    border-radius: 8px;
+    margin-bottom: 15px;
+    font-family: "Cinzel", "Cormorant Garamond", Garamond, "Times New Roman", serif;
 }
 
-/* ========================
-   Welcome Text
-======================== */
-.Welcome-Light,
-.Welcome-Dark {
-  justify-self: center;
-  font-family: "Cinzel", "Cormorant Garamond", Garamond, "Times New Roman", serif;
-  text-align: center;
-  margin: 20px 0;
+.entry h2 {
+    margin: 0 0 5px 0;
+    color: #79B4B7;
 }
 
-.Welcome-Light {
-  color: var(--color-light-text);
+.entry p {
+    margin: 5px 0;
 }
 
-.Welcome-Dark {
-  color: var(--color-dark-text);
+h1{
+    justify-self: center;
+    color: #79B4B7;
+
 }
 
-/* ========================
-   Body
-======================== */
-body {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-  font-family: "Poppins", sans-serif;
-  background-color: #ffffff;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
+.Add{
+    background-color: #79B4B7;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+    padding: 10px 20px;
+    margin-top: 15px;
+    transition: background-color 0.3s ease;
+    font-family: "Poppins", sans-serif;
+    align-self: center;
+    text-decoration: none;
+    text-align: center;
+    display: inline-block;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    user-select: none;
+    border: 2px solid #79B4B7;
+    
 }
 
-/* ========================
-   Form Styling
-======================== */
-form {
-  display: flex;
-  flex-direction: column;
-  width: 50%;
-  margin: 40px auto;
-  padding: 25px;
-  border: 2px solid var(--color-form-border);
-  border-radius: 8px;
-  background-color: var(--color-form-bg);
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
-  transition: transform 0.2s ease;
+.Add:hover {
+    background-color: #5a8b8e;
 }
 
-form:hover {
-  transform: scale(1.01); /* subtle zoom on hover */
+/* Container for buttons (optional, for spacing) */
+.entry-buttons {
+    display: flex;
+    gap: 10px; /* space between buttons */
+    margin-top: 10px;
 }
 
-/* Labels */
-form label {
-  margin-bottom: 10px;
-  font-weight: bold;
-  color: var(--color-form-label);
-  justify-self: center;
-  display: flex;
-  flex-direction: column;
-  font-size: 18px;
+/* Update Button */
+.update-btn {
+    padding: 8px 15px;
+    background-color: #79B4B7; /* same teal color */
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-family: "Cinzel", serif;
+    font-size: 14px;
+    transition: background-color 0.3s, transform 0.2s;
 }
 
-/* Inputs */
-form input {
-  padding: 12px;
-  margin-bottom: 20px;
-  border: 2px solid var(--color-form-border);
-  border-radius: 6px;
-  width: 100%;
-  font-size: 16px;
-  box-sizing: border-box;
-  transition: border 0.3s ease, transform 0.2s ease;
+.update-btn:hover {
+    background-color: #5f989b; /* darker on hover */
+    transform: scale(1.05);
 }
 
-form input:hover {
-  border-color: var(--color-input-hover);
-  transform: scale(1.02);
+/* Delete Button */
+.delete-btn {
+    padding: 8px 15px;
+    background-color: #d9534f; /* classic red for delete */
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-family: "Cinzel", serif;
+    font-size: 14px;
+    transition: background-color 0.3s, transform 0.2s;
 }
 
-/* Message Box */
-.Message {
-  width: 100%;
-  min-height: 150px;
-  font-size: 18px;
-  padding: 12px;
-  box-sizing: border-box;
-  border: 2px solid var(--color-form-border);
-  border-radius: 6px;
-  resize: vertical; /* allow vertical resize */
-  transition: border 0.3s ease;
-}
-
-.Message:hover {
-  border-color: var(--color-input-hover);
-}
-
-/* Submit Button */
-.Submit-btn {
-  padding: 12px;
-  background-color: var(--color-submit-bg);
-  color: var(--color-submit-text);
-  border: none;
-  border-radius: 6px;
-  cursor: pointer;
-  font-size: 16px;
-  transition: background-color 0.3s ease, transform 0.2s ease;
-}
-
-.Submit-btn:hover {
-  background-color: #5f989b; /* slightly darker on hover */
-  transform: scale(1.03);
+.delete-btn:hover {
+    background-color: #c12e2a; /* darker red on hover */
+    transform: scale(1.05);
 }

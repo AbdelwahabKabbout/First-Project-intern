@@ -7,25 +7,13 @@
     <link rel="stylesheet" href="index.css">
 </head>
 <body>
-    <h1 class="Welcome-Light">Welcome to Gbook</h1>
-    <form action="gbook-add-service.php" method="POST">
-        <label for="Name">
-            Name:
-            <input type="text" id="Name" name="Name" required>
-        </label>
-        <label for="Email">
-            Email:
-            <input type="email" id="Email" name="Email" required>
-        </label>
- 
-        <label for="Message" >
-  Message:
-  <input type="text" id="Message" class="Message" name="Message" required>
-</label>
+<h1>Welcome To Gbook</h1>
+    <button class="Add" id="Add">Make a message!</button>
+<div class="container" id="guestbookContainer">
+</div>
 
-        
-        <button class="Submit-btn">Submit</button>
-    </form>
 
+
+<script src="index.js"></script>
 </body>
 </html>
