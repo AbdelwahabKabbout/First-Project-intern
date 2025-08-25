@@ -6,7 +6,10 @@
     <title>Document</title>
     <link rel="stylesheet" href="index.css">
 </head>
+
 <body>
+    <button id="theme-toggle" class="Add">Toggle Dark Mode</button>
+
 <h1>Welcome To Gbook</h1>
     <button class="Add" id="Add">Make a message!</button>
 <div class="container" id="guestbookContainer">
