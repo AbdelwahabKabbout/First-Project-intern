@@ -8,7 +8,7 @@
 </head>
 <body>
     <h1 class="Welcome-Light">Welcome to Gbook</h1>
-    <form action="post.php" method="POST">
+    <form action="gbook-add-service.php" method="POST">
         <label for="Name">
             Name:
             <input type="text" id="Name" name="Name" required>
