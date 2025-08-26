@@ -3,28 +3,47 @@ require 'config.php';
 
 function CreateEntries() {
     global $conn;
-    if ($_SERVER["REQUEST_METHOD"] == "POST") {
-        $name = $_POST['Name'];
-        $email = $_POST['Email'];
-        $message = $_POST['Message'];
 
-        if(empty($name) || empty($email) || empty($message)) {
-            die("All fields are required.");
+    try {
+        if ($_SERVER["REQUEST_METHOD"] !== "POST") {
+            return "Invalid request method.";
+        }
+
+        $name = trim($_POST['Name'] ?? '');
+        $email = trim($_POST['Email'] ?? '');
+        $message = trim($_POST['Message'] ?? '');
+
+        if (!empty($email) && !filter_var($email, FILTER_VALIDATE_EMAIL)) {
+            return "Please enter a valid email address.";
+        }
+
+        $missingFields = [];
+        if (empty($name)) $missingFields[] = "Name";
+        if (empty($email)) $missingFields[] = "Email";
+        if (empty($message)) $missingFields[] = "Message";
+
+        if (!empty($missingFields)) {
+            return "The following fields are required: " . implode(", ", $missingFields) . ".";
         }
 
         $stmt = $conn->prepare("INSERT INTO guestbook (name, email, message) VALUES (?, ?, ?)");
+        if (!$stmt) {
+            return "Database preparation error: " . $conn->error;
+        }
+
         $stmt->bind_param("sss", $name, $email, $message);
 
         if ($stmt->execute()) {
-            echo "New record created successfully";
+            $stmt->close();
+            return true; 
         } else {
-            echo "Error: " . $stmt->error;
+            $error = $stmt->error;
+            $stmt->close();
+            return "Database error: " . $error;
         }
 
-        $stmt->close();
-        $conn->close();
-    } else {
-        echo "Invalid request method.";
+    } catch (Exception $e) {
+        return "An error occurred: " . $e->getMessage();
     }
 }
 
@@ -70,7 +89,7 @@ function UpdateEntries(){
 
 function DeleteEntries(){
     global $conn;
-    if ($_SERVER["REQUEST_METHOD"] == "DELETE" && isset($_GET['id'])) {
+    if ($_SERVER["REQUEST_METHOD"] == "GET" && isset($_GET['id'])) {
         $id = intval($_GET['id']);
         
         $stmt = $conn->prepare("UPDATE guestbook SET Active=0 WHERE id=?");
@@ -78,43 +97,140 @@ function DeleteEntries(){
         
         if ($stmt->execute()) {
             if ($stmt->affected_rows > 0) {
-                echo "Entry deleted successfully.";
+                $stmt->close();
+                $conn->close();
+                header("Location: index.php?deleted=Successfully-deleted");
+                exit;
             } else {
-                echo "No entry found with that ID.";
+                $stmt->close();
+                $conn->close();
+                header("Location: index.php?deleted=Delete-failed");
+                exit;
             }
         } else {
-            echo "Error deleting entry.";
+            $stmt->close();
+            $conn->close();
+            header("Location: index.php?deleted=Delete-failed");
+            exit;
         }
-        
-        $stmt->close();
     } else {
-        echo "Invalid request.";
+        $conn->close();
+        header("Location: index.php?deleted=Delete-failed");
+        exit;
     }
-    $conn->close();
 }
 
-function ReadEntries(){
+
+function ReadEntriesForDisplay() {
     global $conn;
-    $sql = "SELECT id, name, email, message, createdAt FROM guestbook WHERE Active=1 ORDER BY createdAt DESC";
+
+    // Check if dark mode is active
+    $isDarkMode = ($_SESSION['theme'] ?? 'light') === 'dark';
+    $darkClass = $isDarkMode ? ' dark' : '';
+
+    // Paging setup
+    $page = isset($_GET['page']) && is_numeric($_GET['page']) ? intval($_GET['page']) : 1;
+    $limit = 10;
+    $offset = ($page - 1) * $limit;
+
+    // Get total number of active entries for pagination
+    $countResult = $conn->query("SELECT COUNT(*) as total FROM guestbook WHERE Active=1");
+    $totalEntries = $countResult ? $countResult->fetch_assoc()['total'] : 0;
+    $totalPages = ceil($totalEntries / $limit);
+
+    // Fetch entries for current page
+    $sql = "SELECT id, name, email, message, createdAt FROM guestbook WHERE Active=1 ORDER BY createdAt DESC LIMIT $limit OFFSET $offset";
     $result = $conn->query($sql);
 
-    if ($result->num_rows > 0) {
+    if ($result && $result->num_rows > 0) {
+        while($row = $result->fetch_assoc()) {
+            echo "<div class='entry{$darkClass}'>";
+            echo "<h2>" . htmlspecialchars($row['name']) . "</h2>";
+            echo "<p><strong>Email:</strong> " . htmlspecialchars($row['email']) . "</p>";
+            echo "<p>" . nl2br(htmlspecialchars($row['message'])) . "</p>";
+
+            echo "<div class='entry-buttons{$darkClass}'>";
+            echo "<a href='gbook-edit.php?id=" . $row['id'] . "' class='update-btn{$darkClass}'>Update</a>";
+            echo "<a href='index.php?delete_id=" . $row['id'] . "' class='delete-btn{$darkClass}' onclick='return confirm(\"Are you sure you want to delete this entry?\")'>Delete</a>";
+            echo "</div>";
+
+            echo "</div><hr>";
+        }
+
+        
+        echo "<div class='pagination{$darkClass}'>";
+        if ($page > 1) {
+            echo "<a href='?page=" . ($page - 1) . "'>&laquo; Prev</a> ";
+        }
+        for ($i = 1; $i <= $totalPages; $i++) {
+            if ($i == $page) {
+                echo "<strong>$i</strong> ";
+            } else {
+                echo "<a href='?page=$i'>$i</a> ";
+            }
+        }
+        if ($page < $totalPages) {
+            echo "<a href='?page=" . ($page + 1) . "'>Next &raquo;</a>";
+        }
+        echo "</div>";
+
+    } else {
+        echo "No entries found.";
+    }
+    
+}
+
+
+function ReadEntries() {
+    global $conn;
+
+    // Get current page from query string, default to 1
+    $page = isset($_GET['page']) && is_numeric($_GET['page']) ? intval($_GET['page']) : 1;
+    $limit = 10;
+    $offset = ($page - 1) * $limit;
+
+    // Get total number of active entries for pagination
+    $countResult = $conn->query("SELECT COUNT(*) as total FROM guestbook WHERE Active=1");
+    $totalEntries = $countResult ? $countResult->fetch_assoc()['total'] : 0;
+    $totalPages = ceil($totalEntries / $limit);
+
+    // Fetch entries for current page
+    $sql = "SELECT id, name, email, message, createdAt FROM guestbook WHERE Active=1 ORDER BY createdAt DESC LIMIT $limit OFFSET $offset";
+    $result = $conn->query($sql);
+
+    if ($result && $result->num_rows > 0) {
         while($row = $result->fetch_assoc()) {
             echo "<div class='entry'>";
             echo "<h2>" . htmlspecialchars($row['name']) . "</h2>";
             echo "<p><strong>Email:</strong> " . htmlspecialchars($row['email']) . "</p>";
             echo "<p>" . nl2br(htmlspecialchars($row['message'])) . "</p>";
-            
             echo "<div class='entry-buttons'>";
             echo "<button class='update-btn' data-id='" . $row['id'] . "'>Update</button>";
             echo "<button class='delete-btn' data-id='" . $row['id'] . "'>Delete</button>";
             echo "</div>";
-            
             echo "</div><hr>";
         }
+
+        // Pagination links
+        echo "<div class='pagination'>";
+        if ($page > 1) {
+            echo "<a href='?page=" . ($page - 1) . "'>&laquo; Prev</a> ";
+        }
+        for ($i = 1; $i <= $totalPages; $i++) {
+            if ($i == $page) {
+                echo "<strong>$i</strong> ";
+            } else {
+                echo "<a href='?page=$i'>$i</a> ";
+            }
+        }
+        if ($page < $totalPages) {
+            echo "<a href='?page=" . ($page + 1) . "'>Next &raquo;</a>";
+        }
+        echo "</div>";
+
     } else {
         echo "No entries found.";
     }
-    $conn->close();
+    // Do not close $conn here
 }
 ?>

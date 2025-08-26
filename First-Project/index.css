@@ -72,6 +72,8 @@ h1 {
     cursor: pointer;
     font-family: "Cinzel", serif;
     font-size: 14px;
+    text-decoration: none;
+    display: inline-block;
     transition: background-color 0.3s, transform 0.2s;
 }
 
@@ -90,6 +92,8 @@ h1 {
     cursor: pointer;
     font-family: "Cinzel", serif;
     font-size: 14px;
+    text-decoration: none;
+    display: inline-block;
     transition: background-color 0.3s, transform 0.2s;
 }
 
@@ -110,6 +114,8 @@ h1 {
     padding: 10px 15px;
     cursor: pointer;
     font-size: 14px;
+    text-decoration: none;
+    display: inline-block;
     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
     transition: background-color 0.3s ease;
     z-index: 1000;
@@ -195,4 +201,53 @@ hr {
 
 body.dark-mode hr {
     background-color: #444;
+}
+
+.MessageContainer {
+    margin: 20px 0;
+    padding: 15px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    background-color: #f9f9f9;
+    min-height: 50px;
+}
+
+.success-message {
+    background-color: #d4edda;
+    color: #155724;
+    padding: 12px 20px;
+    border: 1px solid #c3e6cb;
+    border-radius: 4px;
+    margin: 20px 0;
+    font-weight: bold;
+    text-align: center;
+}
+
+.error-message {
+    background-color: #f8d7da;
+    color: #721c24;
+    padding: 12px 20px;
+    border: 1px solid #f5c6cb;
+    border-radius: 4px;
+    margin: 20px 0;
+    font-weight: bold;
+    text-align: center;
+}
+
+/* Dark mode message styles */
+body.dark-mode .MessageContainer {
+    background-color: #232526;
+    border-color: #444;
+}
+
+body.dark-mode .success-message {
+    background-color: #1e4620;
+    border-color: #2d5a30;
+    color: #9fdf9f;
+}
+
+body.dark-mode .error-message {
+    background-color: #4a1e1e;
+    border-color: #5a2d2d;
+    color: #df9f9f;
 }
