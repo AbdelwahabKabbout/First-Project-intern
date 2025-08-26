@@ -1,11 +1,10 @@
 function loadGuestbook() {
-  fetch("gbook-display-service.php")
+  fetch("Routes.php?action=Read")
     .then((response) => response.text())
     .then((data) => {
       document.getElementById("guestbookContainer").innerHTML = data;
-      attachEventListeners(); // Attach ALL event listeners AFTER content is loaded
+      attachEventListeners();
 
-      // Apply dark mode to newly loaded content if it's currently active
       if (document.body.classList.contains("dark-mode")) {
         applyDarkMode();
       }
@@ -16,13 +15,12 @@ function loadGuestbook() {
 loadGuestbook();
 
 function attachEventListeners() {
-  // Attach delete listeners
   const deleteButtons = document.querySelectorAll(".delete-btn");
   deleteButtons.forEach((button) => {
     button.addEventListener("click", () => {
       const entryId = button.getAttribute("data-id");
       if (confirm("Are you sure you want to delete this entry?")) {
-        fetch(`gbook-delete-service.php?id=${entryId}`, {
+        fetch(`Routes.php?action=Delete&id=${entryId}`, {
           method: "DELETE",
         })
           .then((response) => response.text())
@@ -47,7 +45,6 @@ function attachEventListeners() {
 function directToAddEntry() {
   window.location.href = "gbook-add.php";
 }
-
 // Check for saved theme preference on page load
 document.addEventListener("DOMContentLoaded", function () {
   const savedTheme = localStorage.getItem("theme");

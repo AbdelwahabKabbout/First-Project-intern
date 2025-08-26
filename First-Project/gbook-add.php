@@ -14,7 +14,7 @@
     
     <div id="message-container"></div>
     
-    <form id="addForm" action="gbook-add-service.php" method="POST">
+    <form id="addForm" action="Routes.php?action=Create" method="POST">
         <label for="Name">
             Name:
             <input type="text" id="Name" name="Name" required>

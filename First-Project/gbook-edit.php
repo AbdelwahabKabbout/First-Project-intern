@@ -31,7 +31,7 @@ $conn->close();
     <title>Edit Guestbook Entry</title>
     <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600&family=Cormorant+Garamond:wght@400;600&family=Poppins:wght@400;500&display=swap" rel="stylesheet">
     <style>
-        /* Light Theme (Default) */
+        
         body {
             font-family: "Cinzel", "Cormorant Garamond", Garamond, "Times New Roman", serif;
             max-width: 800px;
@@ -382,39 +382,39 @@ $conn->close();
             }
         }
 
-        // Form submission handler
+        
         document.getElementById('editForm').addEventListener('submit', function(e) {
-            e.preventDefault();
-            const formData = new FormData();
-            formData.append('id', document.getElementById('entryId').value);
-            formData.append('name', document.getElementById('name').value);
-            formData.append('email', document.getElementById('email').value);
-            formData.append('message', document.getElementById('message').value);
-            
-            fetch('gbook-update-service.php', {
-                method: 'POST',
-                body: formData
-            })
-            .then(response => response.text())
-            .then(data => {
-                const messageContainer = document.getElementById('message-container');
-                if (data.includes('successfully')) {
-                    messageContainer.innerHTML = '<div class="success">' + data + '</div>';
-                    setTimeout(() => {
-                        window.location.href = 'index.php';
-                    }, 2000);
-                } else {
-                    messageContainer.innerHTML = '<div class="error">' + data + '</div>';
-                }
-                window.scrollTo(0, 0);
-            })
-            .catch(error => {
-                console.error('Error:', error);
-                const messageContainer = document.getElementById('message-container');
-                messageContainer.innerHTML = '<div class="error">An error occurred while updating the entry.</div>';
-                window.scrollTo(0, 0);
-            });
-        });
+    e.preventDefault();
+    const formData = new FormData();
+    formData.append('id', document.getElementById('entryId').value);
+    formData.append('name', document.getElementById('name').value);
+    formData.append('email', document.getElementById('email').value);
+    formData.append('message', document.getElementById('message').value);
+    
+    fetch('Routes.php?action=Update', {
+        method: 'POST',
+        body: formData
+    })
+    .then(response => response.text())
+    .then(data => {
+        const messageContainer = document.getElementById('message-container');
+        if (data.includes('successfully')) {
+            messageContainer.innerHTML = '<div class="success">' + data + '</div>';
+            setTimeout(() => {
+                window.location.href = 'index.php';
+            }, 1000);
+        } else {
+            messageContainer.innerHTML = '<div class="error">' + data + '</div>';
+        }
+        window.scrollTo(0, 0);
+    })
+    .catch(error => {
+        console.error('Error:', error);
+        const messageContainer = document.getElementById('message-container');
+        messageContainer.innerHTML = '<div class="error">An error occurred while updating the entry.</div>';
+        window.scrollTo(0, 0);
+    });
+});
     </script>
 </body>
 </html>
