@@ -1,9 +1,20 @@
+/* Light Theme (Default) */
+body {
+    background-color: #ffffff;
+    color: #333333;
+    font-family: "Poppins", sans-serif;
+    margin: 0;
+    padding: 20px;
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
+
 .entry {
     background-color: #f0f0f0;
     padding: 15px;
     border-radius: 8px;
     margin-bottom: 15px;
     font-family: "Cinzel", "Cormorant Garamond", Garamond, "Times New Roman", serif;
+    transition: background-color 0.3s ease;
 }
 
 .entry h2 {
@@ -15,13 +26,13 @@
     margin: 5px 0;
 }
 
-h1{
-    justify-self: center;
+h1 {
+    text-align: center;
     color: #79B4B7;
-
+    transition: color 0.3s ease;
 }
 
-.Add{
+.Add {
     background-color: #79B4B7;
     color: white;
     border: none;
@@ -32,31 +43,29 @@ h1{
     margin-top: 15px;
     transition: background-color 0.3s ease;
     font-family: "Poppins", sans-serif;
-    align-self: center;
     text-decoration: none;
     text-align: center;
     display: inline-block;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
     user-select: none;
     border: 2px solid #79B4B7;
-    
 }
 
 .Add:hover {
     background-color: #5a8b8e;
 }
 
-/* Container for buttons (optional, for spacing) */
+/* Container for buttons */
 .entry-buttons {
     display: flex;
-    gap: 10px; /* space between buttons */
+    gap: 10px;
     margin-top: 10px;
 }
 
 /* Update Button */
 .update-btn {
     padding: 8px 15px;
-    background-color: #79B4B7; /* same teal color */
+    background-color: #79B4B7;
     color: #fff;
     border: none;
     border-radius: 5px;
@@ -67,14 +76,14 @@ h1{
 }
 
 .update-btn:hover {
-    background-color: #5f989b; /* darker on hover */
+    background-color: #5f989b;
     transform: scale(1.05);
 }
 
 /* Delete Button */
 .delete-btn {
     padding: 8px 15px;
-    background-color: #d9534f; /* classic red for delete */
+    background-color: #d9534f;
     color: #fff;
     border: none;
     border-radius: 5px;
@@ -85,6 +94,105 @@ h1{
 }
 
 .delete-btn:hover {
-    background-color: #c12e2a; /* darker red on hover */
+    background-color: #c12e2a;
     transform: scale(1.05);
+}
+
+/* Dark/Light Toggle Button */
+.DarkLight {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    background-color: #79B4B7;
+    color: white;
+    border: none;
+    border-radius: 25px;
+    padding: 10px 15px;
+    cursor: pointer;
+    font-size: 14px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+    transition: background-color 0.3s ease;
+    z-index: 1000;
+}
+
+.DarkLight:hover {
+    background-color: #5a8b8e;
+}
+
+/* Dark Theme */
+body.dark-mode {
+    background-color: #181a1b;
+    color: #e0e0e0;
+}
+
+.entry.dark {
+    background-color: #232526;
+    color: #e0e0e0;
+}
+
+.entry.dark h2 {
+    color: #6ec6ca;
+}
+
+h1.dark {
+    color: #6ec6ca;
+}
+
+.Add.dark {
+    background-color: #6ec6ca;
+    color: #181a1b;
+    border-color: #6ec6ca;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.4);
+}
+
+.Add.dark:hover {
+    background-color: #4e9699;
+}
+
+.update-btn.dark {
+    background-color: #6ec6ca;
+    color: #181a1b;
+}
+
+.update-btn.dark:hover {
+    background-color: #4e9699;
+}
+
+.delete-btn.dark {
+    background-color: #e57373;
+    color: #181a1b;
+}
+
+.delete-btn.dark:hover {
+    background-color: #b71c1c;
+    color: #fff;
+}
+
+.DarkLight.dark {
+    background-color: #6ec6ca;
+    color: #181a1b;
+}
+
+.DarkLight.dark:hover {
+    background-color: #4e9699;
+}
+
+/* Container styles */
+.container {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 20px 0;
+}
+
+/* Horizontal rule styling */
+hr {
+    border: none;
+    height: 1px;
+    background-color: #ddd;
+    margin: 20px 0;
+    transition: background-color 0.3s ease;
+}
+
+body.dark-mode hr {
+    background-color: #444;
 }

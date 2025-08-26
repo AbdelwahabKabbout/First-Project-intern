@@ -6,15 +6,13 @@
     <title>Document</title>
     <link rel="stylesheet" href="index.css">
 </head>
-<body>
-    
+<body >
+    <button class="DarkLight" onclick="toggleDarkLightMode()">Switch</button>
+
 <h1>Welcome To Gbook</h1>
     <button class="Add" id="Add" onclick="directToAddEntry()">Make a message!</button>
 <div class="container" id="guestbookContainer">
 </div>
-
-
-
 <script src="index.js"></script>
 </body>
 </html>

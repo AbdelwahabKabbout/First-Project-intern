@@ -9,9 +9,13 @@ if ($result->num_rows > 0) {
         echo "<h2>" . htmlspecialchars($row['name']) . "</h2>";
         echo "<p><strong>Email:</strong> " . htmlspecialchars($row['email']) . "</p>";
         echo "<p>" . nl2br(htmlspecialchars($row['message'])) . "</p>";
-        // Use data-id instead of id
+        
+        
+        echo "<div class='entry-buttons'>";
         echo "<button class='update-btn' data-id='" . $row['id'] . "'>Update</button>";
         echo "<button class='delete-btn' data-id='" . $row['id'] . "'>Delete</button>";
+        echo "</div>"; 
+        
         echo "</div><hr>";
     }
 } else {
