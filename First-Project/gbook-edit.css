@@ -3,7 +3,7 @@ body {
             max-width: 800px;
             margin: 50px auto;
             padding: 20px;
-             background: linear-gradient(135deg, #e0f7fa 0%, #79B4B7 100%);
+            background: linear-gradient(135deg, #e0f7fa 0%, #79B4B7 100%);
             color: #333333;
             transition: background-color 0.3s ease, color 0.3s ease;
         }
@@ -15,31 +15,26 @@ body {
             transition: color 0.3s ease;
         }
 
-        .entry {
-            background-color: #f0f0f0;
-            padding: 25px;
-            border-radius: 8px;
-            margin-bottom: 20px;
-            font-family: "Cinzel", "Cormorant Garamond", Garamond, "Times New Roman", serif;
-            transition: background-color 0.3s ease;
+        /* Form styling that matches your HTML structure */
+        form {
+            background-color: rgba(255, 255, 255, 0.9);
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
         }
 
-        .form-group {
-            margin-bottom: 20px;
-        }
-
-        .form-group label {
+        label {
             display: block;
-            margin-bottom: 8px;
+            margin-bottom: 20px;
             font-weight: 600;
             color: #79B4B7;
             font-size: 16px;
             transition: color 0.3s ease;
         }
 
-        .form-group input[type="text"],
-        .form-group input[type="email"],
-        .form-group textarea {
+        input[type="text"],
+        input[type="email"],
+        textarea {
             width: 100%;
             padding: 12px;
             border: 2px solid #79B4B7;
@@ -50,29 +45,31 @@ body {
             background-color: white;
             color: #333333;
             transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease;
+            display: block;
+            margin-top: 8px;
         }
 
-        .form-group input:focus,
-        .form-group textarea:focus {
+        input:focus,
+        textarea:focus {
             outline: none;
             border-color: #5a8b8e;
             box-shadow: 0 0 8px rgba(121, 180, 183, 0.3);
         }
 
-        .form-group textarea {
+        textarea {
             height: 120px;
             resize: vertical;
             font-family: "Cinzel", serif;
         }
 
-        .entry-buttons {
+        .form-buttons {
             display: flex;
             gap: 15px;
             justify-content: center;
             margin-top: 25px;
         }
 
-        .Add {
+        .Submit-btn {
             background-color: #79B4B7;
             color: white;
             border: none;
@@ -90,12 +87,12 @@ body {
             border: 2px solid #79B4B7;
         }
 
-        .Add:hover {
+        .Submit-btn:hover {
             background-color: #5a8b8e;
             transform: scale(1.02);
         }
 
-        .cancel-btn {
+        .Back-btn {
             padding: 12px 25px;
             background-color: #6c757d;
             color: #fff;
@@ -110,12 +107,12 @@ body {
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
         }
 
-        .cancel-btn:hover {
+        .Back-btn:hover {
             background-color: #545b62;
             transform: scale(1.02);
         }
 
-        .error {
+        .error-message {
             color: #d9534f;
             background-color: #f8d7da;
             padding: 15px;
@@ -126,7 +123,7 @@ body {
             transition: background-color 0.3s ease, color 0.3s ease;
         }
 
-        .success {
+        .success-message {
             color: #155724;
             background-color: #d4edda;
             padding: 15px;
@@ -135,34 +132,6 @@ body {
             border-left: 4px solid #28a745;
             font-family: "Poppins", sans-serif;
             transition: background-color 0.3s ease, color 0.3s ease;
-        }
-
-        .meta-info {
-            background-color: #e9ecef;
-            padding: 15px;
-            border-radius: 8px;
-            margin-bottom: 20px;
-            color: #6c757d;
-            font-family: "Poppins", sans-serif;
-            font-size: 14px;
-            transition: background-color 0.3s ease, color 0.3s ease;
-        }
-
-        .back-link {
-            text-align: center;
-            margin-top: 30px;
-        }
-
-        .back-link a {
-            color: #79B4B7;
-            text-decoration: none;
-            font-family: "Cinzel", serif;
-            font-size: 16px;
-            transition: color 0.3s ease;
-        }
-
-        .back-link a:hover {
-            text-decoration: underline;
         }
 
         /* Dark/Light Toggle Button */
@@ -180,6 +149,7 @@ body {
             box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
             transition: background-color 0.3s ease;
             z-index: 1000;
+            text-decoration: none;
         }
 
         .DarkLight:hover {
@@ -189,76 +159,66 @@ body {
         /* Dark Theme */
         body.dark-mode {
             background: linear-gradient(135deg, #181a1b 0%, #788085 100%);
-    color: #e0e0e0;
+            color: #e0e0e0;
         }
 
         body.dark-mode h1 {
             color: #6ec6ca;
         }
 
-        body.dark-mode .entry {
-            background-color: #232526;
-            color: #e0e0e0;
+        body.dark-mode form {
+            background-color: rgba(35, 37, 38, 0.9);
         }
 
-        body.dark-mode .form-group label {
+        body.dark-mode label {
             color: #6ec6ca;
         }
 
-        body.dark-mode .form-group input[type="text"],
-        body.dark-mode .form-group input[type="email"],
-        body.dark-mode .form-group textarea {
+        body.dark-mode input[type="text"],
+        body.dark-mode input[type="email"],
+        body.dark-mode textarea {
             background-color: #2d3436;
             color: #e0e0e0;
             border-color: #6ec6ca;
         }
 
-        body.dark-mode .form-group input:focus,
-        body.dark-mode .form-group textarea:focus {
+        body.dark-mode input:focus,
+        body.dark-mode textarea:focus {
             border-color: #4e9699;
             box-shadow: 0 0 8px rgba(110, 198, 202, 0.3);
         }
 
-        body.dark-mode .Add {
+        body.dark-mode .Submit-btn {
             background-color: #6ec6ca;
             color: #181a1b;
             border-color: #6ec6ca;
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.4);
         }
 
-        body.dark-mode .Add:hover {
+        body.dark-mode .Submit-btn:hover {
             background-color: #4e9699;
         }
 
-        body.dark-mode .cancel-btn {
+        body.dark-mode .Back-btn {
             background-color: #495057;
             color: #e0e0e0;
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.4);
         }
 
-        body.dark-mode .cancel-btn:hover {
+        body.dark-mode .Back-btn:hover {
             background-color: #343a40;
         }
 
-        body.dark-mode .error {
+        body.dark-mode .error-message {
             background-color: #3d2b2b;
             color: #e57373;
             border-left-color: #e57373;
         }
 
-        body.dark-mode .success {
+        body.dark-mode .success-message {
             background-color: #2b3d2b;
             color: #81c784;
             border-left-color: #81c784;
-        }
-
-        body.dark-mode .meta-info {
-            background-color: #2d3436;
-            color: #b2bec3;
-        }
-
-        body.dark-mode .back-link a {
-            color: #6ec6ca;
         }
 
         body.dark-mode .DarkLight {
@@ -269,5 +229,3 @@ body {
         body.dark-mode .DarkLight:hover {
             background-color: #4e9699;
         }
-
-        
