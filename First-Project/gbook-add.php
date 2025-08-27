@@ -1,11 +1,12 @@
 <?php
-session_start();
-
+require_once 'Dark-Light.php';
+require_once 'Services.php';
+$old = $_SESSION['old'] ?? [];
 $errorMsg = $_GET['error'] ?? '';
 $successMsg = $_GET['success'] ?? '';
-$old = $_SESSION['old'] ?? [];
 
-function old($key) {
+function old($key)
+{
     global $old;
     return htmlspecialchars($old[$key] ?? '');
 }
@@ -20,9 +21,13 @@ function old($key) {
     <title>Add Guestbook Entry</title>
     <link rel="stylesheet" href="gbook-add.css">
 </head>
+<body<?php echo $isDarkMode ? ' class="dark-mode"' : ''; ?>>
 
-<body>
-    <button class="DarkLight" onclick="toggleDarkLightMode()">🌙 Dark</button>
+    <!-- Theme toggle -->
+    <a href="Dark-Light.php?toggle_theme=1&redirect=<?php echo urlencode($_SERVER['REQUEST_URI']); ?>"
+        class="DarkLight<?php echo $isDarkMode ? ' dark' : ''; ?>">
+        <?php echo $isDarkMode ? '☀️ Light' : '🌙 Dark'; ?>
+    </a>
 
     <h1>Welcome to Gbook</h1>
 
@@ -30,38 +35,34 @@ function old($key) {
         <?php if ($errorMsg): ?>
             <div class="error-message"><?= htmlspecialchars($errorMsg) ?></div>
         <?php endif; ?>
-        <?php if ($successMsg): ?>
+        <?php if ($successMsg == 'Successfully-added'): ?>
             <div class="success-message">✅ Entry created successfully!</div>
         <?php endif; ?>
     </div>
 
-   <form id="addForm" action="Routes.php?action=Create" method="POST">
-    <label for="Name">
-        Name:
-        <input type="text" id="Name" name="Name" value="<?= old('Name') ?>">
-    </label>
+    <form id="addForm" action="Routes.php?action=Create" method="POST">
+        <label for="Name">
+            Name:
+            <input type="text" id="Name" name="Name" value="<?= old('Name') ?>">
+        </label>
 
-    <label for="Email">
-        Email:
-        <input type="text" id="Email" name="Email" value="<?= old('Email') ?>">
-    </label>
+        <label for="Email">
+            Email:
+            <input type="text" id="Email" name="Email" value="<?= old('Email') ?>">
+        </label>
 
-    <label for="Message">
-        Message:
-        <textarea id="Message" class="Message" name="Message" placeholder="Write your message here..."><?= old('Message') ?></textarea>
-    </label>
+        <label for="Message">
+            Message:
+            <textarea id="Message" name="Message" placeholder="Write your message here..."><?= old('Message') ?></textarea>
+        </label>
 
-    <button type="submit" class="Submit-btn">Submit</button>
-    <button type="button" class="Back-btn" onclick="window.location.href='index.php'">Back</button>
-</form>
+        <div class="form-buttons">
+            <button type="submit" class="Submit-btn">Submit</button>
+            <a href="index.php" class="Back-btn">Back</a>
+        </div>
+    </form>
 
-
-    <div class="back-link">
-        <a href="index.php">← Back to Guestbook</a>
-    </div>
-
-    <script src="gbook-add.js"></script>
-</body>
-<?php unset($_SESSION['old']); ?>
+    <?php unset($_SESSION['old']); ?>
+    </body>
 
 </html>
