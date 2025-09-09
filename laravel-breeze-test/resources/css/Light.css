@@ -1,0 +1,250 @@
+/* Body */
+body {
+    font-family: Arial, sans-serif;
+    background: linear-gradient(to left, #202020, #5DD62C);
+    color: #202020;
+    margin: 0;
+    padding: 20px;
+    min-height: 100vh;
+}
+
+/* Main heading */
+h1 {
+    text-align: center;
+    color: #FFFFFF;
+    margin-bottom: 30px;
+    font-size: 2.5rem;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+/* Create Post Link */
+.create-link {
+    display: block;
+    text-align: center;
+    margin: 0 auto 30px;
+    color: #FFFFFF;
+    background-color: #4CAF50;
+    padding: 12px 24px;
+    border-radius: 8px;
+    width: fit-content;
+    text-decoration: none;
+    font-weight: bold;
+    transition: background-color 0.3s, transform 0.2s;
+}
+
+.create-link:hover {
+    background-color: #45a049;
+    transform: translateY(-2px);
+    text-decoration: none;
+}
+
+/* Form container */
+form:not(.inline) {
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    margin: 50px auto;
+    background-color: #F8F8F8;
+    padding: 30px;
+    width: 400px;
+    border-radius: 10px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+/* Labels */
+label {
+    margin-bottom: 5px;
+    font-weight: bold;
+    color: #202020;
+}
+
+/* Inputs and Textarea */
+input, textarea {
+    background-color: #FFFFFF;
+    color: #202020;
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 15px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 1rem;
+    transition: border 0.3s, box-shadow 0.3s;
+    box-sizing: border-box;
+}
+
+input:focus, textarea:focus {
+    outline: none;
+    border-color: #5DD62C;
+    box-shadow: 0 0 5px #5DD62C;
+}
+
+/* Form Buttons */
+form:not(.inline) button {
+    background-color: #4CAF50;
+    color: white;
+    padding: 12px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-weight: bold;
+    transition: background-color 0.3s, transform 0.2s;
+    margin-top: 10px;
+}
+
+form:not(.inline) button:hover {
+    background-color: #45a049;
+    transform: translateY(-2px);
+}
+
+/* Post container */
+.post {
+    border: 1px solid #ccc;
+    margin: 20px auto;
+    padding: 20px;
+    border-radius: 8px;
+    background-color: #FFFFFF;
+    width: 80%;
+    max-width: 600px;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+}
+
+/* Post headings */
+.post h2 {
+    margin: 0 0 10px;
+    color: #202020;
+    font-size: 1.5rem;
+}
+
+.post p {
+    margin: 8px 0;
+    line-height: 1.5;
+}
+
+/* Post actions container */
+.post-actions {
+    margin-top: 15px;
+    display: flex;
+    gap: 15px;
+    align-items: center;
+}
+
+/* Edit link styling */
+.edit-link {
+    color: #5DD62C;
+    text-decoration: none;
+    font-weight: bold;
+    padding: 8px 16px;
+    background-color: rgba(93, 214, 44, 0.1);
+    border-radius: 4px;
+    transition: background-color 0.3s;
+}
+
+.edit-link:hover {
+    background-color: rgba(93, 214, 44, 0.2);
+    text-decoration: none;
+}
+
+/* Inline form for delete button */
+.inline {
+    display: inline;
+    margin: 0;
+    padding: 0;
+    width: auto;
+    background: none;
+    box-shadow: none;
+}
+
+/* Delete button */
+.delete-btn {
+    background-color: #dc3545;
+    color: white;
+    padding: 8px 16px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-weight: bold;
+    font-size: 0.9rem;
+    transition: background-color 0.3s;
+}
+
+.delete-btn:hover {
+    background-color: #c82333;
+}
+
+/* Responsive adjustments */
+@media (max-width: 500px) {
+    body {
+        padding: 10px;
+    }
+    
+    h1 {
+        font-size: 2rem;
+    }
+    
+    form:not(.inline), .post {
+        width: 95%;
+        padding: 15px;
+        margin: 10px auto;
+    }
+    
+    .post-actions {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 10px;
+    }
+    
+    .create-link {
+        padding: 10px 20px;
+        font-size: 0.9rem;
+    }
+}
+
+
+.alert {
+    padding: 15px;
+    margin-bottom: 20px;
+    border-radius: 5px;
+    font-weight: bold;
+    text-align: center;
+    color: #f8f8f8;
+    font-size: larger;
+    
+}
+
+
+.alert:hover {
+    scale: 1.02;
+    transition: transform 0.3s;
+}
+
+img{
+    width: 70px;
+    height: 70px;
+    vertical-align: -webkit-baseline-middle;
+    margin-right: 10px;
+}
+
+img:hover {
+    scale: 1.1;
+    transition: transform 0.3s;
+}
+
+.back-link{
+    display: block;
+    text-align: center;
+    margin: 0 auto 20px;
+    color: #FFFFFF;
+    background-color: #45a049;
+    padding: 10px 20px;
+    border-radius: 8px;
+    width: fit-content;
+    text-decoration: none;
+    font-weight: bold;
+    transition: background-color 0.3s, transform 0.2s;
+}
+
+.back-link:hover {
+    background-color: #4CAF50;
+    transform: translateY(-2px);
+    text-decoration: none;
+}
