@@ -1065,3 +1065,27 @@ input[type="date"]:focus {
         border: 1px solid #555;
     }
 }
+
+
+.permission-container{
+    display: flex;
+    flex-direction: row;
+    gap: 10px;
+    margin: 20px;
+    border: #007bff solid 1px;
+    border-radius: 10px;
+    align-items: center;
+    justify-items: center;
+    justify-content: center;
+    background-color: #6ca0ff;
+    box-shadow: 0 0 5px 5px rgba(74,144,226,0.6);
+}
+
+.permission-container:hover{
+   box-shadow: 0 0 8px 8px rgba(74,144,226,0.6);
+}
+
+.UserDisplay{
+    text-align: center;
+    justify-self: center;
+}
